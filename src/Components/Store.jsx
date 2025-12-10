@@ -15,11 +15,11 @@ import surmaIMG from "../assets/surma.jpg";
 import QuranIMG from "../assets/quranpic.webp";
 import CounterIMG from "../assets/clock-counter.webp";
 
-// lightweight inline SVG placeholder (fallback)
+// lightweight placeholder
 const placeholder = `data:image/svg+xml;utf8,
 <svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
   <rect width='100%' height='100%' fill='%23f3f4f6'/>
-  <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-size='24'>Image not available</text>
+  <text x='50%' y='50%' text-anchor='middle' fill='%239ca3af'>Image not available</text>
 </svg>`;
 
 const products = [
@@ -43,8 +43,14 @@ const products = [
 export default function Store() {
 
   const [activeFilter, setActiveFilter] = useState("All");
+  const [cart, setCart] = useState([]);  // ⭐ CART STATE
 
-  // filter logic
+  // ⭐ Add to Cart function
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+    alert(`✔ Added to cart: ${product.name}`);
+  };
+
   const filteredProducts =
     activeFilter === "All"
       ? products
@@ -52,6 +58,12 @@ export default function Store() {
 
   return (
     <section id="store" className="my-16 px-4 md:px-12">
+      
+      {/* Cart badge (optional) */}
+      <div className="text-right mb-4 text-lg font-bold text-green-800">
+        🛒 Cart: {cart.length} items
+      </div>
+
       <h2 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-10 text-center">
         Halal Store — Featured Collections
       </h2>
@@ -99,7 +111,11 @@ export default function Store() {
               <p className="text-gray-700 mt-2">{product.category} • {product.gender}</p>
               <p className="text-green-900 font-semibold mt-3 text-lg">{product.price}</p>
 
-              <button className="mt-4 w-full py-2 rounded-full bg-green-700 text-white font-semibold shadow-md hover:bg-green-800 transition-colors duration-300">
+              {/* ⭐ WORKING Add to Cart button */}
+              <button
+                onClick={() => addToCart(product)}
+                className="mt-4 w-full py-2 rounded-full bg-green-700 text-white font-semibold shadow-md hover:bg-green-800 transition-colors duration-300"
+              >
                 Add to Cart
               </button>
             </div>

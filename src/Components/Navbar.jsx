@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/logos.jpg";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,6 +28,11 @@ export default function Navbar() {
     }
   };
 
+  const handleCartClick = () => {
+    // Placeholder: change to open cart drawer or navigate to cart page
+    window.location.href = '/cart';
+  };
+
   return (
     <>
       {/* NAVBAR */}
@@ -51,8 +56,8 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop Links + Login */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Links + Login + Cart */}
+          <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-6">
               {links.map((item) => (
                 <a
@@ -64,6 +69,17 @@ export default function Navbar() {
                 </a>
               ))}
             </div>
+
+            {/* Cart button (beside Login) */}
+            <button
+              onClick={handleCartClick}
+              className="flex items-center gap-2 border border-transparent bg-white/10 hover:bg-white/15 px-3 py-2 rounded-lg transition-shadow duration-150"
+              aria-label="Open cart"
+              title="Cart"
+            >
+              <FaShoppingCart className="text-lg" />
+              <span className="hidden sm:inline text-sm font-medium">Cart</span>
+            </button>
 
             <button
               onClick={() => setLoginOpen(true)}
@@ -128,18 +144,29 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* Mobile Login Button */}
+            {/* Mobile Login + Cart Buttons */}
             <div className="flex flex-col gap-2">
-              <button
-                onClick={() => {
-                  setLoginOpen(true);
-                  setMenuOpen(false);
-                }}
-                className="w-full bg-yellow-300 text-green-900 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition shadow-sm"
-                aria-label="Open login"
-              >
-                Login
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleCartClick}
+                  className="flex-1 flex items-center justify-center gap-2 bg-white/10 text-white py-3 rounded-lg font-semibold hover:bg-white/15 transition"
+                  aria-label="Open cart"
+                >
+                  <FaShoppingCart />
+                  <span className="hidden sm:inline">Cart</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setLoginOpen(true);
+                    setMenuOpen(false);
+                  }}
+                  className="flex-1 bg-yellow-300 text-green-900 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition shadow-sm"
+                  aria-label="Open login"
+                >
+                  Login
+                </button>
+              </div>
             </div>
           </div>
         </div>
