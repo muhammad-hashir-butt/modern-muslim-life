@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import Home from './Components/Home' 
-import Footer from './components/Footer'
+import Navbar from './components/Navbar.jsx'
+import Home from './Components/Home.jsx' 
+import Footer from './components/Footer.jsx'
 
 
 export default function App(){
