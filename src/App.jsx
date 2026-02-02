@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './components/Navbar'
-import Home from './Components/Home'   // ❌ ERROR HERE
+import Home from './Components/Home' 
 import Footer from './components/Footer'
 
 
